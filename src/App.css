@@ -1,0 +1,54 @@
+/* .App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Profile_pic{
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+.pic{
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+} */
+.films-container {
+  /* background-color: orange; */
+  width: 340px;
+}
+
+.films-specs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.films-poster {
+  width: 100%;
+  height: 650px;
+  object-fit: cover;
+}
+
+.films-name {
+  font-size: 24px;
+  margin: 0;
+}
+
+.films-summary {
+  margin-top: 0;
+}
+
+.films-rating {
+  font-size: 18px;
+}
+
+.films-list-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
