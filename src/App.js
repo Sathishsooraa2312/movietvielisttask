@@ -1,9 +1,18 @@
 import './App.css';
 import React from 'react'
 import {useState} from 'react'
+import { Routes, Route, Navigate,useNavigate } from "react-router-dom";
+import { NotFound } from './NotFound';
+import { Home } from './Home';
+import { AddMovie } from './AddMovie';
+import { MovieList } from './MovieList';
+import { AddColor } from './AddColor';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
 
 function App() {
-const films= [
+  const [films,setFilms]= useState([
     {
       id: "100",
       name: "RRR",
@@ -83,43 +92,37 @@ const films= [
       trailer: "https://www.youtube.com/embed/NgsQ8mVkN8w"
     }
     
-  ];
+  ])
+  const navigate=useNavigate();
   return <>
-  
-  <div className="films-list-container">
-  { 
-  films.map((n)=><Movie name={n}/>)
-  }
-  </div>
-  
-  </>
-    
-  
-}
+   
+   <AppBar position="static">
+        <Toolbar>
+        <Button onClick={()=>navigate("/")}
+         color="inherit">Home</Button>
+        <Button  onClick={()=>navigate("/movies")}
+        color="inherit">Movies</Button>
+        <Button  onClick={()=>navigate("/addmovie")}
+        color="inherit">Add Movies</Button>
+        <Button  onClick={()=>navigate("/colorgame")}
+        color="inherit">Colour game</Button>
+        </Toolbar>
+      </AppBar>
 
-function Counter(){
-let [like,setlike]=useState(0)
-let [dislike,setdislike]=useState(0)
-  return<>
-    <button onClick={()=>setlike(like+1)}>👍{like}</button>
-    <button onClick={()=>setdislike(dislike+1)}>🤞{dislike}</button>
+<section className='route-container'>
+      <Routes>
+        <Route path="/" element={<Home />} /> 
+        <Route path="/films" element={<Navigate replace to="/movies"/> } />
+        <Route path="/movies" element={<MovieList data={films}/> } />
+        <Route path="/addmovie" element={<AddMovie  data={films} setFilms={setFilms}/> } />
+        <Route path="/colorgame" element={<AddColor /> } />
+        <Route path="*" element={<NotFound /> } />
+        
+      </Routes>
+      </section>
+</>
+    }
 
-  </>
-}
-
-function Movie({name}) {
-  
  
-  return<>
   
-    <div className="films-container">
-    <img src={name.poster} alt={name.name} className="films-poster" />
-    <div className="films-specs">
-    <h2 className="films-name">{name.name}</h2>
-    <p className="films-rating">{name.rating}</p>
-    </div>
-  <p className="films-summary">{name.summary}</p>
-  <Counter/>
-  </div>
-    </>}
 export default App;
