@@ -17,9 +17,8 @@
   object-fit: contain;
 } */
 .films-container {
-  /* background-color: orange; */
-  width: 340px;
-  background-color: aliceblue;
+ border-radius: 7px;
+width: 340px;
   height: min-content;
 }
 
@@ -88,6 +87,10 @@ gap:6px;
   .route-container{
     padding:30px;
     
+  }
+  .films-details-container{
+    max-width: fit-content;
+    padding:16px;
   }
   
   

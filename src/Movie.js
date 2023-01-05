@@ -7,42 +7,43 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import { Counter } from './Counter';
 import InfoIcon from '@mui/icons-material/Info';
+import Card from '@mui/material/Card';
+import {  useNavigate} from 'react-router-dom';
 
- export function Movie({ name }) {
-
+ export function Movie({ movie ,id,deleteButton}) {
+  const navigate=useNavigate();
   let [toggle, setToggle] = useState(false);
   let changes = {
-    color: name.rating >= 8.5 ? "green" : "red"
+    color: movie.rating >= 8.5 ? "green" : "red"
   };
   return <>
 
-    <card className="films-container">
-      <img src={name.poster} alt={name.name} className="films-poster" />
+    <Card className="films-container">
+      <img src={movie.poster} alt={movie.name} className="films-poster" />
       <CardContent><div className="films-specs">
-        <h2 className="films-name">{name.name}
-          <IconButton color="primary"
+        <h2 className="films-name">{movie.name}
+          <IconButton 
+          color="primary"
            onClick={() => setToggle(!toggle)} aria-label="toggle-summary">
             {toggle ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </IconButton>
-          <IconButton color="primary" 
-          onClick={() => setToggle(!toggle)} aria-label="Movie-details">
+          <IconButton 
+          color="primary" 
+          onClick={() => navigate(`/movies/${id}`)} 
+          aria-label="Movie-details">
            <InfoIcon /> 
           </IconButton>
-          
-          
-          
           </h2>
-
-        <p style={changes} className="films-rating">{name.rating}🌟 </p>
+         <p style={changes} className="films-rating">🌟{movie.rating} </p>
       </div>
 
 
-        {toggle ? null : <p className="films-summary">{name.summary}</p>}
+        {toggle ? null : <p className="films-summary">{movie.summary}</p>}
       </CardContent>
       <CardActions>
-        <Counter />
+        <Counter /> {deleteButton}
       </CardActions>
 
-    </card>
+    </Card>
   </>;
 }
