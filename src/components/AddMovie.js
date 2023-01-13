@@ -18,7 +18,7 @@ export function AddMovie() {
       summary: Summary,
       trailer:Trailer
     };
-  fetch("http://localhost:4000/films",
+  fetch("https://624a7faa852fe6ebf887cc87.mockapi.io/movie",
     {   method:"POST",
         body:JSON.stringify(newMovie),
         headers: {"Content-Type": "application/json",}
