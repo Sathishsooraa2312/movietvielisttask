@@ -92,5 +92,14 @@ gap:6px;
     max-width: fit-content;
     padding:16px;
   }
-  
+  .color-button{
+    height:40px;
+    font-size: large;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .color-button:hover{
+    color: red;
+    
+  }
   
