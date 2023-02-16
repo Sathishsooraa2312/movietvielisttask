@@ -26,6 +26,7 @@ export function MovieList() {
           method:"DELETE",
         }).then(()=>getMovies());
         
+        
   }
   return <>
     <div className="films-list-container">
@@ -37,7 +38,8 @@ export function MovieList() {
       {<IconButton onClick={()=>deleteMovie(mv.id)} color="error" aria-label="delete">
       <DeleteIcon />
     </IconButton>}
-    EditButton={<IconButton  onClick={() => navigate(`/movies/edit/${mv.id}`)}  color="error" aria-label="edit">
+    EditButton=
+    {<IconButton  onClick={() => navigate(`/movies/edit/${mv.id}`)}  color="error" aria-label="edit">
     <EditIcon />
 </IconButton>}
       />))}

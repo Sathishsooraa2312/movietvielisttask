@@ -5,17 +5,14 @@ import Box from '@mui/material/Box'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { API } from './Global';
-
+import React ,{useEffect,useState}from 'react';
+ import { useParams } from "react-router-dom"
 
 const movieValidationSchema = yup.object({
     name: yup
         .string()
         .required("Why not fill this name😅")
         .min(1, "need a longer name🤔"),
-        id: yup
-        .string()
-        .required("Why not fill this id😅")
-        .min(4, "need a longer id🤔"),
     poster: yup
         .string()
         .required("Why not fill this poster😅")
@@ -34,27 +31,37 @@ const movieValidationSchema = yup.object({
         .min(4, "need a longer trailer🤔")
 })
 
-export function AddMovie() {
+
+export function EditMovies() {
+  const {id}=useParams();
+const [film, setFilm] = useState(null);
+  useEffect(() => {
+    fetch(`${API}/films/${id}`)
+      .then((data) => data.json())
+      .then((mv) => setFilm(mv));
+  }, [id]);
+  return film ? <EditMoviesForm film={film}/> : "loading";
+  }
+  export function EditMoviesForm({film}){
     const { handleSubmit, values, handleChange, touched, handleBlur, errors } = useFormik({
         initialValues: {
-            name: "",
-            id:"",
-            poster: "",
-            rating: "",
-            summary: "",
-            trailer: ""
+            name: film.name,
+            poster: film.poster,
+            rating: film.rating,
+            summary: film.summary,
+            trailer: film.trailer
         },
         validationSchema: movieValidationSchema,
-        onSubmit: (newMovieList) => {
-            console.log('onSubmit', newMovieList)
-            addMovie(newMovieList)
+        onSubmit: (editMovieList) => {
+            console.log('onSubmit', editMovieList)
+            EditMovie(editMovieList)
         }
     })
     const navigate = useNavigate()
-    const addMovie = (newMovieList) => {
-        fetch(`${API}/films`, {
-            method: "POST",
-            body: JSON.stringify(newMovieList),
+    const EditMovie = (editMovieList) => {
+        fetch(`${API}/films/${film.id}`, {
+            method: "PUT",
+            body: JSON.stringify(editMovieList),
             headers: {
                 "Content-Type": "application/json"
             },
@@ -71,15 +78,6 @@ export function AddMovie() {
                 error={touched.name && errors.name}
                 helperText={touched.name && errors.name ? errors.name : null}
                 label="Name" variant="outlined" />
-
-<TextField
-                name="id"
-                value={values.id}
-                onBlur={handleBlur}
-                onChange={handleChange}
-                error={touched.id && errors.id}
-                helperText={touched.id && errors.id ? errors.id : null}
-                label="id" variant="outlined" />
 
 
             <TextField
@@ -116,7 +114,8 @@ export function AddMovie() {
                 error={touched.trailer && errors.trailer}
                 helperText={touched.trailer && errors.trailer ? errors.trailer : null}
                 label="Trailer" variant="outlined" />
-            <Button type="Submit" variant="contained">Add Movie</Button>
+            <Button type="Submit" variant="contained">Submit</Button>
         </Box>
     </>;
 }
+

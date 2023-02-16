@@ -16,6 +16,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { MovieDetails } from './MovieDetails';
 import { BasicForm } from './BasicForm';
+import { EditMovies } from './EditMovies';
 function App() {
   const [films]= useState([]);
   const navigate=useNavigate();
@@ -61,6 +62,7 @@ function App() {
         <Route path="/films" element={<Navigate replace to="/films"/> } />
         <Route path="/movies" element={<MovieList data={films}/> } />
         <Route path="/movies/:id" element={<MovieDetails /> } />
+        <Route path="/movies/edit/:id" element={<EditMovies /> } />
         <Route path="/basicform" element={<BasicForm /> } />
         <Route path="/addmovie" element={<AddMovie /> } />
         <Route path="/colorgame" element={<AddColor /> } />
@@ -76,3 +78,4 @@ function App() {
   );
     }
 export default App;
+

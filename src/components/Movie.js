@@ -10,7 +10,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import Card from '@mui/material/Card';
 import {  useNavigate} from 'react-router-dom';
 
- export function Movie({ movie ,id,deleteButton}) {
+ export function Movie({ movie ,id,deleteButton,EditButton}) {
   const navigate=useNavigate();
   let [toggle, setToggle] = useState(false);
   let changes = {
@@ -41,7 +41,7 @@ import {  useNavigate} from 'react-router-dom';
         {toggle ? null : <p className="films-summary">{movie.summary}</p>}
       </CardContent>
       <CardActions>
-        <Counter /> {deleteButton}
+        <Counter /> {deleteButton} {EditButton}
       </CardActions>
 
     </Card>
